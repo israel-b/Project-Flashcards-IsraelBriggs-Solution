@@ -5,13 +5,12 @@ import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 import { readDeck } from "../../utils/api";
 import { useHistory } from "react-router-dom";
 
-function DeckEdit() {
+function DeckEdit({handleDeckEdit}) {
     const initialFormState = {
         name: "",
         description: "",
     };
 
-    const [deck, setDeck] = useState({});
     const [formData, setFormData] = useState({...initialFormState});
     const { deckId } = useParams();
     const history = useHistory();
@@ -25,6 +24,8 @@ function DeckEdit() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Submitted: ", formData)
+        handleDeckEdit(formData);
+        history.push("/");
     }
 
     if(formData.name){
@@ -32,7 +33,7 @@ function DeckEdit() {
             <>
                 <NavBreadcrumb currentNav={formData.name} subNav={"Edit Deck"} />
                 <h1>Edit Deck</h1>
-                <DeckForm handleSubmit={handleSubmit} setFormData={setFormData} formData={formData} deck={deck} />
+                <DeckForm handleSubmit={handleSubmit} setFormData={setFormData} formData={formData} />
             </>
         );
     }

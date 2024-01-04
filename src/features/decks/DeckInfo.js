@@ -6,7 +6,7 @@ import DeckDeleteButton from "./DeckDeleteButton";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-function DeckInfo({ decks, cards, handleDeckDelete, handleCardDelete }){
+function DeckInfo({ decks, handleDeckDelete, handleCardDelete }){
     const [deck, setDeck] = useState({});
     const { deckId } = useParams();
 

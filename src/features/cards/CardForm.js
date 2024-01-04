@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
-function CardForm({deck, card}) {
-    const initialFormState = {
-        front: "",
-        back: ""
-    };
-    if(card){
-        initialFormState.front = card.front;
-        initialFormState.back = card.back;
+function CardForm({ handleSubmit, formData, setFormData}) {
+    // const initialFormState = {
+    //     front: "",
+    //     back: ""
+    // };
+    // if(card){
+    //     initialFormState.front = card.front;
+    //     initialFormState.back = card.back;
         
-    }
+    // }
 
-    const [formData, setFormData] = useState({...initialFormState});
+    // const [formData, setFormData] = useState({...initialFormState});
     const history = useHistory();
     
     const handleChange = ({ target }) => {
@@ -22,7 +22,7 @@ function CardForm({deck, card}) {
 
     return(
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="front">Front</label>
                     <textarea type="text" className="form-control" id="front" name="front" value={formData.front} onChange={handleChange}  />

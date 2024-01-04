@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
-function DeckForm({deck, handleSubmit, formData, setFormData}){
+function DeckForm({handleSubmit, formData, setFormData}){
     const history = useHistory();
 
     const handleChange = ({ target }) => {

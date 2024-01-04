@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 import DeckForm from "./DeckForm";
 
@@ -12,11 +11,6 @@ function DeckCreate({handleDeckCreate, decks}){
     };
 
     const [formData, setFormData] = useState({...initialFormState});
-    const history = useHistory();
-
-    const handleChange = ({ target }) => {
-        setFormData({...formData, [target.name]: target.value,});
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();

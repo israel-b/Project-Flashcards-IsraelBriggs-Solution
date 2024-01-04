@@ -3,22 +3,19 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import DeckList from "../features/decks/DeckList";
 import data from "../data/db.json";
-import { Link, Route, Switch, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Study from "../features/study/Study";
 import CreateDeckButton from "../features/decks/CreateDeckButton";
 import DeckCreate from "../features/decks/DeckCreate";
 import DeckInfo from "../features/decks/DeckInfo";
-import NavBreadcrumb from "./NavBreadcrumb";
-import { createDeck, deleteCard, deleteDeck, listDecks } from "../utils/api";
+import { createDeck, deleteCard, deleteDeck, listDecks, updateDeck } from "../utils/api";
 import DeckEdit from "../features/decks/DeckEdit";
 import CardCreate from "../features/cards/CardCreate";
 import CardEdit from "../features/cards/CardEdit";
 
 function Layout() {
-  //const [decks, setDecks] = useState(data.decks);
   const [decks, setDecks] = useState([]);
 
-  const [cards, setCards] = useState(data.cards);
   const history = useHistory();
 
   useEffect(async () => {
@@ -40,6 +37,10 @@ function Layout() {
           (deck) => deck.id !== deckId));
       })
     }
+  }
+
+  const handleDeckEdit = (updatedDeck) => {
+    updateDeck(updatedDeck);
   }
 
   const handleCardDelete = (cardId) => {
@@ -66,10 +67,10 @@ function Layout() {
         <DeckCreate handleDeckCreate={handleDeckCreate} decks={decks} />
       </Route>
       <Route exact path="/decks/:deckId">
-        <DeckInfo decks={decks} cards={cards} handleDeckDelete={handleDeckDelete} handleCardDelete={handleCardDelete} />
+        <DeckInfo decks={decks} handleDeckDelete={handleDeckDelete} handleCardDelete={handleCardDelete} />
       </Route>
       <Route path="/decks/:deckId/edit">
-        <DeckEdit />
+        <DeckEdit handleDeckEdit={handleDeckEdit}/>
       </Route>
       <Route path="/decks/:deckId/cards/new">
         <CardCreate />
