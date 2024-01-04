@@ -16,9 +16,12 @@ function DeckEdit({handleDeckEdit}) {
     const history = useHistory();
 
 
-    useEffect(async () => {
-        const viewDeck = await readDeck(deckId);
-        setFormData(viewDeck);
+    useEffect(() => {
+        async function loadDeck() {
+            const viewDeck = await readDeck(deckId);
+            setFormData(viewDeck);
+        }
+        loadDeck();
     }, [deckId]);
 
     const handleSubmit = (event) => {

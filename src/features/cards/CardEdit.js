@@ -16,12 +16,15 @@ function CardEdit() {
 
     const [formData, setFormData] = useState({...initialFormState});
 
-    useEffect(async () => {
-        const viewDeck = await readDeck(deckId);
-        const viewCard = await readCard(cardId);
-        setDeck(viewDeck);
-        setFormData(viewCard);
-    }, [cardId]);
+    useEffect(() => {
+        async function loadDeckAndCard() {
+            const viewDeck = await readDeck(deckId);
+            const viewCard = await readCard(cardId);
+            setDeck(viewDeck);
+            setFormData(viewCard); 
+        }
+        loadDeckAndCard();
+    }, [deckId, cardId]);
 
     const handleSubmit = (event) => {
         event.preventDefault();

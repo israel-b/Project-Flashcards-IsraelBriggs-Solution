@@ -17,10 +17,13 @@ function Layout() {
 
   const history = useHistory();
 
-  useEffect(async () => {
-    const listOfDecks = await listDecks();
-    setDecks(listOfDecks);
-  }, [])
+  useEffect(() => {
+    async function loadDecks() {
+      const listOfDecks = await listDecks();
+      setDecks(listOfDecks);
+    }
+    loadDecks();       
+  }, [decks])
 
   // Handles deck creation
   const handleDeckCreate = (newDeck) => {

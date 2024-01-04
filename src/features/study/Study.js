@@ -11,9 +11,12 @@ function Study() {
     const { deckId } = useParams();
     const history = useHistory();
 
-    useEffect(async () => {
-        const studyDeck = await readDeck(deckId)
-        setDeck(studyDeck);
+    useEffect(() => {
+        async function loadDeck() {
+            const studyDeck = await readDeck(deckId);
+            setDeck(studyDeck);
+        }
+        loadDeck();
     }, [deckId]);
 
     const nextCard = () => {

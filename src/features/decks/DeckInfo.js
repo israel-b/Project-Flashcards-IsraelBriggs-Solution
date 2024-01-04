@@ -10,9 +10,12 @@ function DeckInfo({ decks, handleDeckDelete, handleCardDelete }){
     const [deck, setDeck] = useState({});
     const { deckId } = useParams();
 
-    useEffect(async () => {
-        const viewDeck = await readDeck(deckId);
-        setDeck(viewDeck);
+    useEffect(() => {
+        async function loadDeck() {
+            const viewDeck = await readDeck(deckId);
+            setDeck(viewDeck);
+        }
+        loadDeck();
     }, [deckId]);
     
     if(deck.name){

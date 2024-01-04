@@ -17,9 +17,12 @@ function CardCreate() {
 
     const [formData, setFormData] = useState({...initialFormState});
 
-    useEffect(async () => {
-        const viewDeck = await readDeck(deckId);
-        setDeck(viewDeck);
+    useEffect(() => {
+        async function loadDeck() {
+            const viewDeck = await readDeck(deckId);
+            setDeck(viewDeck);
+        }
+        loadDeck();
     }, [deckId]);
 
     const handleSubmit = (event) => {
