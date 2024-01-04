@@ -6,19 +6,18 @@ import DeckDeleteButton from "./DeckDeleteButton";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-function DeckInfo({ decks, cards, deleteDeck, deleteCard }){
+function DeckInfo({ decks, cards, handleDeckDelete, handleCardDelete }){
     const [deck, setDeck] = useState({});
     const { deckId } = useParams();
 
     useEffect(async () => {
         const viewDeck = await readDeck(deckId);
         setDeck(viewDeck);
-    }, [deckId, cards]);
+    }, [deckId]);
     
     if(deck.name){
         console.log("Current deck: ", deck);
         console.log("List of decks: ", decks);
-        console.log("Current deck index: ", decks.indexOf(deck));
         return (
             <>
                 <NavBreadcrumb currentNav={deck.name}/>
@@ -40,7 +39,7 @@ function DeckInfo({ decks, cards, deleteDeck, deleteCard }){
                     </Link>
                     </div>
                     <div className="col">
-                        <DeckDeleteButton deleteDeck={() => deleteDeck(0)}/>
+                        <DeckDeleteButton handleDeckDelete={() => handleDeckDelete(0)}/>
                     </div>
                 </div>
                 <br />
@@ -50,7 +49,7 @@ function DeckInfo({ decks, cards, deleteDeck, deleteCard }){
                     <CardItem 
                         key={index} 
                         card={card}
-                        deleteCard={() => deleteCard(index)} />
+                        handleCardDelete={() => handleCardDelete(card.id)} />
                 ))}
             </>
         );

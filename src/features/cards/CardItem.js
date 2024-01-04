@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-function CardItem({card, deleteCard}){
+function CardItem({card, handleCardDelete}){
     return(
         <>
             <div className="container border">
@@ -18,7 +18,7 @@ function CardItem({card, deleteCard}){
                         <Link to={`/decks/${card.deckId}/cards/${card.id}/edit`}>
                             <button>Edit</button>
                         </Link>
-                        <button type="button" className="btn btn-danger btn-sm" name="delete" onClick={deleteCard}>Delete</button>
+                        <button type="button" className="btn btn-danger btn-sm" name="delete" onClick={handleCardDelete}>Delete</button>
                     </div>
                 </div>
             </div>

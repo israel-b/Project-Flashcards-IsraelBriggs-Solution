@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
-function CardForm({deck}) {
+function CardForm({deck, card}) {
     const initialFormState = {
         front: "",
         back: ""
     };
+    if(card){
+        initialFormState.front = card.front;
+        initialFormState.back = card.back;
+        
+    }
 
     const [formData, setFormData] = useState({...initialFormState});
     const history = useHistory();

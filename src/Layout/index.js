@@ -3,65 +3,70 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import DeckList from "../features/decks/DeckList";
 import data from "../data/db.json";
-import { Link, Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, Route, Switch, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Study from "../features/study/Study";
 import CreateDeckButton from "../features/decks/CreateDeckButton";
 import DeckCreate from "../features/decks/DeckCreate";
 import DeckInfo from "../features/decks/DeckInfo";
 import NavBreadcrumb from "./NavBreadcrumb";
-import { listDecks } from "../utils/api";
+import { createDeck, deleteCard, deleteDeck, listDecks } from "../utils/api";
 import DeckEdit from "../features/decks/DeckEdit";
 import CardCreate from "../features/cards/CardCreate";
+import CardEdit from "../features/cards/CardEdit";
 
 function Layout() {
   //const [decks, setDecks] = useState(data.decks);
   const [decks, setDecks] = useState([]);
 
   const [cards, setCards] = useState(data.cards);
+  const history = useHistory();
 
   useEffect(async () => {
     const listOfDecks = await listDecks();
     setDecks(listOfDecks);
   }, [])
 
-  const createDeck = (newDeck) => {
-    setDecks((currentDecks) => [...currentDecks, newDeck,])
+  // Handles deck creation
+  const handleDeckCreate = (newDeck) => {
+    createDeck(newDeck).then(() => setDecks((currentDecks) => [...currentDecks, newDeck]));
+    history.push("/");
   }
 
-  // Handles delete of decks
-  const deleteDeck = (indexToDelete) => {
+  // Handles deck deletion
+  const handleDeckDelete = (deckId) => {
     if(window.confirm("Delete this deck?  You will not be able to recover it.")) {
-      setDecks((currentDecks) => currentDecks.filter(
-        (deck, index) => index !== indexToDelete)
-      );
+      deleteDeck(deckId).then(() => {
+        setDecks((currentDecks) => currentDecks.filter(
+          (deck) => deck.id !== deckId));
+      })
     }
   }
 
-  const deleteCard = (indexToDelete) => {
+  const handleCardDelete = (cardId) => {
     if(window.confirm("Delete this card? You will not be able to recover it")) {
-      setCards((currentCards) => currentCards.filter(
-        (card, index) => index !== indexToDelete)
-      );
+      deleteCard(cardId).then(() => {
+        window.location.reload();
+      })
     }
   }
 
-  return (
+  if(decks){return (
     <>
     <Header />
     <div className="container">
     <Switch>
       <Route exact path="/">
         <CreateDeckButton />
-        <DeckList decks={decks} cards={cards} deleteDeck={deleteDeck} />
+        <DeckList decks={decks} handleDeckDelete={handleDeckDelete} />
       </Route>
       <Route path="/decks/:deckId/study">
-        <Study decks={decks} cards={cards} />
+        <Study />
       </Route>
       <Route path="/decks/new">
-        <DeckCreate createDeck={createDeck} decks={decks} />
+        <DeckCreate handleDeckCreate={handleDeckCreate} decks={decks} />
       </Route>
       <Route exact path="/decks/:deckId">
-        <DeckInfo decks={decks} cards={cards} deleteDeck={deleteDeck} deleteCard={deleteCard} />
+        <DeckInfo decks={decks} cards={cards} handleDeckDelete={handleDeckDelete} handleCardDelete={handleCardDelete} />
       </Route>
       <Route path="/decks/:deckId/edit">
         <DeckEdit />
@@ -70,7 +75,7 @@ function Layout() {
         <CardCreate />
       </Route>
       <Route path="/decks/:deckId/cards/:cardId/edit">
-        <p>Edit card</p>
+        <CardEdit />
       </Route>
       <Route>
         <NotFound />
@@ -78,7 +83,9 @@ function Layout() {
     </Switch>
     </div>
     </>
-  );
+  );}
+
+  return"Loading...";
 }
 
 export default Layout;

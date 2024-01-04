@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { readDeck } from "../../utils/api";
-import { Route, Switch, useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, useParams } from "react-router-dom/cjs/react-router-dom.min";
 import NotEnoughCards from "./NotEnoughCards";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 
-function Study({ decks, cards }) {
+function Study() {
     const [deck, setDeck] = useState({});
     const [cardSlot, setCardSlot] = useState(0)
     const [flipped, setFlipped] = useState(false)
@@ -13,7 +13,6 @@ function Study({ decks, cards }) {
 
     useEffect(async () => {
         const studyDeck = await readDeck(deckId)
-        console.log(studyDeck);
         setDeck(studyDeck);
     }, [deckId]);
 
@@ -37,7 +36,7 @@ function Study({ decks, cards }) {
                 <h1>Study: {deck.name}</h1>
                 <div className="container border rounded">
                     {deck.cards.length < 3 
-                    ? <NotEnoughCards count={deck.cards.length} />
+                    ? <NotEnoughCards count={deck.cards.length} deckId={deck.id} />
                     : <div>
                         <h4>Card {cardSlot + 1} of {deck.cards.length}</h4>
                         {!flipped 

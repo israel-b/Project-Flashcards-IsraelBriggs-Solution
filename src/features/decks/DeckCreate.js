@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
 
-function DeckCreate({createDeck, decks}){
+function DeckCreate({handleDeckCreate, decks}){
     // Blank initial form state
     const initialFormState = {
         id: decks.length + 1,
@@ -20,7 +20,7 @@ function DeckCreate({createDeck, decks}){
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log("Submitted: ", formData);
-        createDeck(formData);
+        handleDeckCreate(formData);
         setFormData({...initialFormState});
     };
     

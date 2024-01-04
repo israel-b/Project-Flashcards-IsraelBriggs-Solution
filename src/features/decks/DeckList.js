@@ -1,7 +1,7 @@
 import React from "react";
 import DeckItem from "./DeckItem";
 
-function DeckList({decks, cards, deleteDeck}) {
+function DeckList({decks, handleDeckDelete}) {
     return (
         <div className="deck-list table">
             <table>
@@ -18,10 +18,9 @@ function DeckList({decks, cards, deleteDeck}) {
                 <tbody>
                     {decks.map((deck, index) => (
                         <DeckItem 
-                            deleteDeck={() => deleteDeck(index)}
+                            handleDeckDelete={() => handleDeckDelete(deck.id)}
                             key={index}
                             deck={deck}
-                            cards={cards}
                         />
                     ))}
                 </tbody>
