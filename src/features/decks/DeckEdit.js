@@ -6,28 +6,33 @@ import { readDeck } from "../../utils/api";
 import { useHistory } from "react-router-dom";
 
 function DeckEdit() {
+    const initialFormState = {
+        name: "",
+        description: "",
+    };
+
     const [deck, setDeck] = useState({});
-    const [formData, setFormData] = useState({});
+    const [formData, setFormData] = useState({...initialFormState});
     const { deckId } = useParams();
     const history = useHistory();
 
 
     useEffect(async () => {
         const viewDeck = await readDeck(deckId);
-        setDeck(viewDeck);
+        setFormData(viewDeck);
     }, [deckId]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("Submitted: ")
+        console.log("Submitted: ", formData)
     }
 
-    if(deck.name){
+    if(formData.name){
         return (
             <>
-                <NavBreadcrumb currentNav={deck.name} subNav={"Edit Deck"} />
+                <NavBreadcrumb currentNav={formData.name} subNav={"Edit Deck"} />
                 <h1>Edit Deck</h1>
-                <DeckForm deck={deck} />
+                <DeckForm handleSubmit={handleSubmit} setFormData={setFormData} formData={formData} deck={deck} />
             </>
         );
     }

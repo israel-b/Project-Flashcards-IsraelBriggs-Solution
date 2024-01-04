@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import NavBreadcrumb from "../../Layout/NavBreadcrumb";
+import DeckForm from "./DeckForm";
 
 function DeckCreate({handleDeckCreate, decks}){
     // Blank initial form state
@@ -21,23 +22,13 @@ function DeckCreate({handleDeckCreate, decks}){
         event.preventDefault();
         console.log("Submitted: ", formData);
         handleDeckCreate(formData);
-        setFormData({...initialFormState});
     };
     
     return (
         <>
             <NavBreadcrumb currentNav={"Create Deck"} />
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange} />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea type="text" className="form-control" id="description" name="description" value={formData.description} onChange={handleChange} />
-                </div>
-                <button type="submit" className="btn btn-secondary" onClick={() => history.push("/")}>Cancel</button> <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+            <h1>Create Deck</h1>
+            <DeckForm handleSubmit={handleSubmit} setFormData={setFormData} formData={formData} />
         </>
     );
 }

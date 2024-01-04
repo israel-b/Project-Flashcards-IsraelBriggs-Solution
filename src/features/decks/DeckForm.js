@@ -2,17 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
-function DeckForm({deck, handleSubmit}){
-    const initialFormState = {
-        name: "",
-        description: ""
-    };
-    if(deck){
-        initialFormState.name = deck.name;
-        initialFormState.description = deck.description;
-    }
-    
-    const [formData, setFormData] = useState({...initialFormState});
+function DeckForm({deck, handleSubmit, formData, setFormData}){
     const history = useHistory();
 
     const handleChange = ({ target }) => {
@@ -21,7 +11,7 @@ function DeckForm({deck, handleSubmit}){
 
     return(
         <>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
                     <input type="text" className="form-control" id="name" name="name" value={formData.name} onChange={handleChange}  />
