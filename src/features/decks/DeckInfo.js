@@ -39,7 +39,7 @@ function DeckInfo({ decks, handleDeckDelete, handleCardDelete }){
                     </Link>
                     </div>
                     <div className="col">
-                        <DeckDeleteButton handleDeckDelete={() => handleDeckDelete(0)}/>
+                        <button type="button" className="btn btn-danger btn-sm" name="delete" onClick={() => handleDeckDelete(deck.id)} >Delete</button>
                     </div>
                 </div>
                 <br />

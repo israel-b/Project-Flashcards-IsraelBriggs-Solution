@@ -1,34 +1,12 @@
 {
   "decks": [
     {
-      "id": 1,
-      "name": "Rendering in React",
-      "description": "Testing edit for quickly building a complex web application that relies on DOM manipulation. "
-    },
-    {
       "name": "React asdfasd",
       "description": "React Router is a collection of navigational components that compose declaratively with your application.",
       "id": 2
-    },
-    {
-      "id": 3,
-      "name": "fasdf",
-      "description": "asdf asd"
     }
   ],
   "cards": [
-    {
-      "id": 2,
-      "front": "How do you modify the state of a different React component?",
-      "back": "Not at all! State is visible to the component only.",
-      "deckId": 1
-    },
-    {
-      "id": 3,
-      "front": "How do you pass data 'down' to a React child component?",
-      "back": "As properties or props",
-      "deckId": 1
-    },
     {
       "front": "What does <Switch> do?",
       "back": "Renders the first matching child <Route> ",
@@ -36,35 +14,16 @@
       "id": 5
     },
     {
-      "cards": [],
-      "front": "b",
-      "back": "b",
-      "deckId": 1,
+      "front": "asdf asdf",
+      "back": "sad fsd",
+      "deckId": 2,
+      "id": 6
+    },
+    {
+      "front": "test test",
+      "back": "iving/generated/EventListener.js:26:30)\n      at innerInvokeEventListeners (node_modules/.pnpm/jsdom@16.3.0/node_modules/jsdom/lib/jsdom/living/even",
+      "deckId": 2,
       "id": 7
-    },
-    {
-      "front": "asdf asd",
-      "back": "asasdf a",
-      "deckId": 3,
-      "id": 8
-    },
-    {
-      "front": "sssssssssssssss",
-      "back": "333333333333",
-      "deckId": 3,
-      "id": 9
-    },
-    {
-      "front": "asdf",
-      "back": "asdf",
-      "deckId": 3,
-      "id": 10
-    },
-    {
-      "front": "f",
-      "back": "ddd",
-      "deckId": 3,
-      "id": 11
     }
   ]
 }

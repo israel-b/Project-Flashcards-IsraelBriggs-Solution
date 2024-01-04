@@ -3,17 +3,6 @@ import { useHistory } from "react-router-dom";
 
 
 function CardForm({ handleSubmit, formData, setFormData}) {
-    // const initialFormState = {
-    //     front: "",
-    //     back: ""
-    // };
-    // if(card){
-    //     initialFormState.front = card.front;
-    //     initialFormState.back = card.back;
-        
-    // }
-
-    // const [formData, setFormData] = useState({...initialFormState});
     const history = useHistory();
     
     const handleChange = ({ target }) => {

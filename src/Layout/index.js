@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import NotFound from "./NotFound";
 import DeckList from "../features/decks/DeckList";
-import data from "../data/db.json";
 import { Route, Switch, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import Study from "../features/study/Study";
 import CreateDeckButton from "../features/decks/CreateDeckButton";
@@ -35,6 +34,7 @@ function Layout() {
       deleteDeck(deckId).then(() => {
         setDecks((currentDecks) => currentDecks.filter(
           (deck) => deck.id !== deckId));
+          history.push("/");
       })
     }
   }
@@ -51,7 +51,7 @@ function Layout() {
     }
   }
 
-  if(decks){return (
+  return (
     <>
     <Header />
     <div className="container">
@@ -84,9 +84,7 @@ function Layout() {
     </Switch>
     </div>
     </>
-  );}
-
-  return"Loading...";
+  )
 }
 
 export default Layout;
